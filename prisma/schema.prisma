@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String @id @default(uuid())
+  name          String
+  email         String @unique
+  password_hash String
+  typeUser      String @default("CLIENT")
+
+  // Tickets que o usuário CRIOU
+  ticketsCreated Ticket[] @relation("TicketCreator")
+
+  // Tickets que o técnico ATENDE
+  ticketsAssigned Ticket[] @relation("TicketTechnician")
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  branch     branch?  @relation(fields: [branch_id], references: [id])
+  branch_id  String?
+
+  @@map("users")
+}
+
+model Ticket {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  category    String
+  department  String
+
+  status   String @default("OPEN")
+  priority String
+
+  creator_id String
+  creator    User   @relation("TicketCreator", fields: [creator_id], references: [id])
+
+  technician_id String?
+  technician    User?   @relation("TicketTechnician", fields: [technician_id], references: [id])
+
+  branch    branch? @relation(fields: [branch_id], references: [id])
+  branch_id String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("tickets")
+}
+
+model branch {
+  id   String  @id @default(uuid())
+  name String
+  code String? @unique
+
+  users   User[]
+  tickets Ticket[]
+
+  @@map("branchs")
+}
