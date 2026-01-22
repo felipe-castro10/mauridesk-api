@@ -15,7 +15,7 @@ model User {
   name          String
   email         String @unique
   password_hash String
-  typeUser      String @default("CLIENT")
+  type_user     String
 
   // Tickets que o usuário CRIOU
   ticketsCreated Ticket[] @relation("TicketCreator")
@@ -25,7 +25,7 @@ model User {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  branch     branch?  @relation(fields: [branch_id], references: [id])
+  branch     Branch?  @relation(fields: [branch_id], references: [id])
   branch_id  String?
 
   @@map("users")
@@ -47,7 +47,7 @@ model Ticket {
   technician_id String?
   technician    User?   @relation("TicketTechnician", fields: [technician_id], references: [id])
 
-  branch    branch? @relation(fields: [branch_id], references: [id])
+  branch    Branch? @relation(fields: [branch_id], references: [id])
   branch_id String?
 
   created_at DateTime @default(now())
@@ -56,13 +56,14 @@ model Ticket {
   @@map("tickets")
 }
 
-model branch {
-  id   String  @id @default(uuid())
+model Branch {
+  id   String @id @default(uuid())
   name String
-  code String? @unique
+  cnpj String @unique
 
-  users   User[]
-  tickets Ticket[]
+  users      User[]
+  tickets    Ticket[]
+  created_at DateTime @default(now())
 
   @@map("branchs")
 }
