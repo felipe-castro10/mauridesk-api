@@ -10,6 +10,7 @@ export class InMemoryBranchsRepository implements BranchsRepository {
       id: randomUUID(),
       name: 'Filial teste',
       cnpj: '123456',
+      created_at: new Date(),
     }
 
     this.items.push(branch)
@@ -19,6 +20,16 @@ export class InMemoryBranchsRepository implements BranchsRepository {
 
   async findByCNPJ(cnpj: string) {
     const branch = this.items.find((item) => item.cnpj === cnpj)
+
+    if (!branch) {
+      return null
+    }
+
+    return branch
+  }
+
+  async findByID(id: string) {
+    const branch = this.items.find((item) => item.id === id)
 
     if (!branch) {
       return null

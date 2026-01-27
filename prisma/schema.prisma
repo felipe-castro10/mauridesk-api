@@ -23,9 +23,9 @@ model User {
   // Tickets que o técnico ATENDE
   ticketsAssigned Ticket[] @relation("TicketTechnician")
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  branch     Branch?  @relation(fields: [branch_id], references: [id])
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+  branch     Branch?   @relation(fields: [branch_id], references: [id])
   branch_id  String?
 
   @@map("users")
