@@ -24,4 +24,15 @@ export class PrismaBranchsRepository implements BranchsRepository {
 
     return branch
   }
+
+  async findByID(id: string): Promise<Branch | null> {
+    // buscando a filial pelo ID
+    const branch = await prisma.branch.findFirst({
+      where: {
+        id,
+      },
+    })
+
+    return branch
+  }
 }
