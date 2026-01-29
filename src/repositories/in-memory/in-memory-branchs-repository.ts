@@ -8,8 +8,8 @@ export class InMemoryBranchsRepository implements BranchsRepository {
   async create(data: Prisma.BranchUncheckedCreateInput): Promise<Branch> {
     const branch = {
       id: randomUUID(),
-      name: 'Filial teste',
-      cnpj: '123456',
+      name: data.name,
+      cnpj: data.cnpj,
       created_at: new Date(),
     }
 
@@ -36,5 +36,13 @@ export class InMemoryBranchsRepository implements BranchsRepository {
     }
 
     return branch
+  }
+
+  async fetchBranchs(): Promise<Branch[] | null> {
+    if (this.items.length === 0) {
+      return null
+    }
+
+    return this.items
   }
 }

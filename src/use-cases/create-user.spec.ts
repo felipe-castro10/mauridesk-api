@@ -25,7 +25,7 @@ describe('Create User Use Case', () => {
     const { user } = await sut.execute({
       name: 'User teste',
       email: 'user@example.com',
-      password_hash: '123456',
+      password: '123456',
       type_user: 'CLIENT',
       branch_id: branch.id,
     })
@@ -44,7 +44,7 @@ describe('Create User Use Case', () => {
     await sut.execute({
       name: 'User teste',
       email,
-      password_hash: '123456',
+      password: '123456',
       type_user: 'CLIENT',
       branch_id: branch.id,
     })
@@ -53,7 +53,7 @@ describe('Create User Use Case', () => {
       sut.execute({
         name: 'User teste2',
         email,
-        password_hash: '123456',
+        password: '123456',
         type_user: 'CLIENT',
         branch_id: branch.id,
       }),

@@ -35,4 +35,11 @@ export class PrismaBranchsRepository implements BranchsRepository {
 
     return branch
   }
+
+  async fetchBranchs(): Promise<Branch[] | null> {
+    // buscando todas as filiais do meu banco de dados
+    const branchs = await prisma.branch.findMany()
+
+    return branchs
+  }
 }

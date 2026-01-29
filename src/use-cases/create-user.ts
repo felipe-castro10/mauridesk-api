@@ -8,7 +8,7 @@ import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 interface CreateUserRequest {
   name: string
   email: string
-  password_hash: string
+  password: string
   type_user: string
   branch_id: string
 }
@@ -26,13 +26,13 @@ export class CreateUserUseCase {
   async execute({
     name,
     email,
-    password_hash,
+    password,
     type_user,
     branch_id,
   }: CreateUserRequest): Promise<CreateUserResponse> {
     // criando hash da senha
 
-    const password_hashed = await hash(password_hash, 6)
+    const password_hash = await hash(password, 6)
 
     // verificando se a filial existe
 
@@ -52,7 +52,7 @@ export class CreateUserUseCase {
     const user = await this.usersRepository.create({
       name,
       email,
-      password_hash: password_hashed,
+      password_hash,
       type_user,
       branch_id,
     })
