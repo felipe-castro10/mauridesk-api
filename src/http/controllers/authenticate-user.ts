@@ -26,6 +26,7 @@ export async function authenticateUser(
     const token = await reply.jwtSign(
       {
         role: user.type_user,
+        branch_id: user.branch_id,
       },
       {
         sign: {

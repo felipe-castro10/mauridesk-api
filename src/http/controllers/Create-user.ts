@@ -13,8 +13,6 @@ export async function createUser(request: FastifyRequest, reply: FastifyReply) {
     branch_id: z.string(),
   })
 
-  console.log(request.body)
-
   const { name, email, password, type_user, branch_id } =
     createBodySchema.parse(request.body)
 

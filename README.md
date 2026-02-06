@@ -3,8 +3,8 @@
 Help desk app
 
 ## RF's (Requisitos funcionais)
-- [ ] Deve ser possível cadastrar;
-- [ ] Deve ser possível se autenticar;
+- [X] Deve ser possível cadastrar ;
+- [X] Deve ser possível se autenticar;
 - [ ] Deve ser possível obter o perfil de um usuário logado;
 - [ ] Deve ser possível criar um chamado;
 - [ ] Deve ser possível validar o chamado;
@@ -15,7 +15,7 @@ Help desk app
 
 
 ## RN's (Regas de negócio)
-- [ ] O usuário não poderia cadastrar com um e-mail duplicado;
+- [x] O usuário não poderia cadastrar com um e-mail duplicado;
 - [ ] O client poderá acessar somente os chamados criados;
 - [ ] O client poderá validar o seu chamado, se o mesmo for atendido.;
 - [ ] O chamado só poderá ser atendido pelos técnicos;
@@ -25,7 +25,7 @@ Help desk app
 
 ## RN's (Requisitos não-funcionais)
 
-- [ ] A senha do usuário prcisar estar criptografada;
-- [ ] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
+- [x] A senha do usuário prcisar estar criptografada;
+- [x] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
 - [ ] Todas as listas de chamados precisam estar paginadas com 20 itens por página
-- [ ] O usuário deve ser identificado por um JWT(Json Web Token);
+- [x] O usuário deve ser identificado por um JWT(Json Web Token);

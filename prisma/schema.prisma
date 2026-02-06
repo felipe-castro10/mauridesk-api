@@ -39,7 +39,7 @@ model Ticket {
   department  String
 
   status   String @default("OPEN")
-  priority String
+  priority String @default("LOW")
 
   creator_id String
   creator    User   @relation("TicketCreator", fields: [creator_id], references: [id])
@@ -52,6 +52,14 @@ model Ticket {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  //struct SLA
+  first_response_at DateTime?
+  resolved_at       DateTime?
+  closed_at         DateTime?
+
+  sla_due_at   DateTime // prazo máximo de resolução
+  sla_violated Boolean  @default(false)
 
   @@map("tickets")
 }
