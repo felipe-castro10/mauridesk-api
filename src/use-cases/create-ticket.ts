@@ -6,7 +6,6 @@ interface CreateTicketRequest {
   description: string
   category: string
   department: string
-  status: string
   priority: string
   creator_id: string
   branch_id: string
@@ -24,17 +23,16 @@ export class CreateTicketUseCase {
     description,
     category,
     department,
-    status,
     priority,
     creator_id,
     branch_id,
   }: CreateTicketRequest): Promise<CreateTicketResponse> {
+    console.log(title)
     const ticket = await this.ticketsRepository.create({
       title,
       description,
       category,
       department,
-      status,
       priority,
       creator_id,
       branch_id,
