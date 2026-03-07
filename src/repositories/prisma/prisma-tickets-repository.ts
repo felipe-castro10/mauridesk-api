@@ -60,4 +60,19 @@ export class PrismaTicketsRepository implements TicketsRepository {
 
     return ticket
   }
+
+  async startTicket(id: string, technician_id: string): Promise<Ticket> {
+    const ticket = await prisma.ticket.update({
+      where: {
+        id,
+      },
+      data: {
+        status: 'IN PROGRESS',
+        first_response_at: new Date(),
+        technician_id,
+      },
+    })
+
+    return ticket
+  }
 }

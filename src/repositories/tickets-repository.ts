@@ -9,4 +9,5 @@ export interface TicketsRepository {
     creator_id?: string,
   ): Promise<Ticket[] | null>
   getTicket(id: string): Promise<Ticket | null>
+  startTicket(id: string, technician_id: string): Promise<Ticket>
 }

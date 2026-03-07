@@ -5,21 +5,21 @@ Help desk app
 ## RF's (Requisitos funcionais)
 - [X] Deve ser possível cadastrar ;
 - [X] Deve ser possível se autenticar;
-- [ ] Deve ser possível obter o perfil de um usuário logado;
-- [ ] Deve ser possível criar um chamado;
-- [ ] Deve ser possível validar o chamado;
-- [ ] Deve ser possível listar os chamados criados dos clients;
-- [ ] Deve ser possível atender o chamado;
+- [x] Deve ser possível obter o perfil de um usuário logado;
+- [x] Deve ser possível criar um chamado;
+- [x] Deve ser possível validar o chamado;
+- [x] Deve ser possível listar os chamados criados dos clients;
+- [x] Deve ser possível atender o chamado;
 - [ ] Deve ser possível validar o atendimento do técnico;
 
 
 
 ## RN's (Regas de negócio)
 - [x] O usuário não poderia cadastrar com um e-mail duplicado;
-- [ ] O client poderá acessar somente os chamados criados;
-- [ ] O client poderá validar o seu chamado, se o mesmo for atendido.;
-- [ ] O chamado só poderá ser atendido pelos técnicos;
-- [ ] Os técnicos terão acesso a todos os chamados dos clientes;
+- [x] O client poderá acessar somente os chamados criados;
+- [x] O client poderá validar o seu chamado, se o mesmo for atendido.;
+- [x] O chamado só poderá ser atendido pelos técnicos;
+- [x] Os técnicos terão acesso a todos os chamados dos clientes;
 - [ ] O Técnico poderá designar os chamados para outros técnicos;
 
 
