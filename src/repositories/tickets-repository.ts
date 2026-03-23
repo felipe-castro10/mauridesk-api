@@ -12,4 +12,6 @@ export interface TicketsRepository {
   getTicket(id: string): Promise<Ticket | null>
   startTicket(id: string, technician_id: string): Promise<Ticket>
   fetchMetrics(creator_id?: string): Promise<MetricsDTO | null>
+  closeTicket(id:string, technician_id: string, resolved?: boolean):Promise<Ticket>
+  restartTicket(id: string, technician_id: string): Promise<Ticket>
 }

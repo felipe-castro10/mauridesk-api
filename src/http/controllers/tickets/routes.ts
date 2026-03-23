@@ -6,6 +6,8 @@ import { getTicket } from './get-ticket'
 import { verifyIsTech } from '@/http/middlewares/verify-is-tech'
 import { startTicket } from './start-ticket'
 import { fetchMetrics } from './fetch-metrics'
+import { closeTicket } from './close-ticket'
+import { restartTicket } from './restart-ticket'
 
 export async function ticketsRoutes(app: FastifyInstance) {
   app.addHook('onRequest', async (request, reply) => {
@@ -15,12 +17,14 @@ export async function ticketsRoutes(app: FastifyInstance) {
   app.post('/tickets', createTicket)
   app.get('/tickets', fetchTickets)
   app.get('/ticket/:id', getTicket)
+  app.get('/tickets/metrics', fetchMetrics)
 
   app.patch(
     '/ticket/start/:id',
     { onRequest: [verifyJWT, verifyIsTech] },
     startTicket,
   )
-
-  app.get('/tickets/metrics', fetchMetrics)
+  app.patch('/ticket/closed/:id/:resolved', {onRequest:[verifyJWT, verifyIsTech]}, closeTicket)
+  app.patch('/ticket/restart/:id', {onRequest:[verifyJWT,verifyIsTech]}, restartTicket)
+ 
 }

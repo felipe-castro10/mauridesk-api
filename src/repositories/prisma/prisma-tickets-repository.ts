@@ -8,7 +8,8 @@ import type { Metric } from '@prisma/client/runtime'
 import type { MetricsDTO } from '../interfaces/get-metrics-DTO'
 
 export class PrismaTicketsRepository implements TicketsRepository {
-
+ 
+ 
   async create(data: CreateTicketDTO): Promise<Ticket> {
     const sla_due_at = calculateSla(data.priority)
     // inserindo novo ticket no banco
@@ -159,4 +160,49 @@ private async countByStatus(status: 'OPEN' | 'IN PROGRESS' | 'RESOLVED' | 'CLOSE
 
   return await prisma.ticket.count({ where });
 }
+
+ async closeTicket(id: string, technician_id: string, resolved: boolean = false): Promise<Ticket> {
+  
+  const currentTicket = await prisma.ticket.findUnique({
+    where:{id}
+  })
+
+  const now = new Date()
+
+  const sla_violated: boolean = now> new Date(currentTicket?.sla_due_at!) 
+
+  const finalStatus = resolved ? "RESOLVED" : "CLOSED"
+
+
+  const ticketUpdated = await prisma.ticket.update({
+    where:{id},
+    data:{
+      status: finalStatus,
+      closed_at: now,
+      resolved,
+      sla_violated,
+      technician_id
+    }
+  })
+
+  return ticketUpdated
+
+}
+
+ async restartTicket(id: string, technician_id: string): Promise<Ticket> {
+    const ticket = await prisma.ticket.update({
+      where:{
+        id
+      },
+      data:{
+        status: 'IN PROGRESS',
+        technician_id
+      }
+    })
+
+
+    return ticket
+  }
+
+
 }

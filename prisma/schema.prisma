@@ -56,7 +56,7 @@ model Ticket {
 
   //struct SLA
   first_response_at DateTime?
-  resolved_at       DateTime?
+  resolved          Boolean   @default(false)
   closed_at         DateTime?
 
   sla_due_at   DateTime // prazo máximo de resolução
