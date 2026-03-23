@@ -2,19 +2,18 @@ import { makeProfileUserUseCase } from '@/use-cases/factories/make-get-profile-u
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
+
+
 export async function getProfileUser(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const idParamsSchema = z.object({
-    id: z.string(),
-  })
 
-  const { id } = idParamsSchema.parse(request.params)
+  const id = request.user.sub;
 
   const makeUserProfileUseCase = await makeProfileUserUseCase()
 
-  const { user } = await makeUserProfileUseCase.execute({ id })
+  const { user } = await makeUserProfileUseCase.execute({id})
 
   return reply.status(200).send({ user })
 }

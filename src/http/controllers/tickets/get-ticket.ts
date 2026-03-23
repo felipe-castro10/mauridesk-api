@@ -15,5 +15,5 @@ export async function getTicket(request: FastifyRequest, reply: FastifyReply) {
     id,
   })
 
-  return reply.status(200).send({ ticket })
+  return reply.status(200).send( ticket )
 }

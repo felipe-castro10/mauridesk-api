@@ -5,11 +5,7 @@ import { verifyJWT } from '@/http/middlewares/verify-jwt'
 import { verifyIsAdmin } from '@/http/middlewares/verify-is-admin'
 
 export async function branchsRoutes(app: FastifyInstance) {
-  app.addHook('onRequest', async () => {
-    await verifyJWT
-    await verifyIsAdmin
-  })
 
-  app.get('/branchs', fetchBranchs)
-  app.post('/branchs', createBranch)
+  app.get('/branches', fetchBranchs)
+  app.post('/branches', { onRequest: [verifyJWT,verifyIsAdmin] }, createBranch)
 }

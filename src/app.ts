@@ -2,11 +2,30 @@ import fastify from 'fastify'
 import { usersRoutes } from './http/controllers/users/routes'
 import { ZodError } from 'zod'
 import { env } from './env'
+import fastifyCors from '@fastify/cors'
 import fastifyJwt from '@fastify/jwt'
 import { ticketsRoutes } from './http/controllers/tickets/routes'
 import { branchsRoutes } from './http/controllers/branchs/routes'
+import fastifyMultipart from '@fastify/multipart'
+import fastifyStatic from '@fastify/static'
+import { uploadConfig } from './config/upload'
 
-export const app = fastify()
+export const app =  fastify()
+
+ app.register(fastifyCors, {
+  origin: ["http://localhost:5173"]
+})
+
+app.register(fastifyMultipart, {
+  limits: {
+    fileSize: 5 * 1024 * 1024, // Limite de 5MB por exemplo
+  },
+})
+
+app.register(fastifyStatic, {
+  root: uploadConfig.directory,
+  prefix: '/files/',
+})
 
 // Registrando o jwt no fastify
 app.register(fastifyJwt, {

@@ -12,14 +12,13 @@ export async function createTicket(
     category: z.string(),
     department: z.string(),
     priority: z.string(),
+    branch_id: z.string(),
   })
 
-  const { title, description, category, department, priority } =
+  const { title, description, category, department, priority, branch_id } =
     createTicketBodySchema.parse(request.body)
 
   const createTicketUseCase = makeCreateTicketUseCase()
-
-  console.log(request.user.sub)
 
   await createTicketUseCase.execute({
     title,
@@ -28,7 +27,7 @@ export async function createTicket(
     department,
     priority,
     creator_id: request.user.sub,
-    branch_id: request.user.branch_id,
+    branch_id
   })
 
   return reply.status(201).send({})

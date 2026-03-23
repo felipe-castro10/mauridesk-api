@@ -2,8 +2,11 @@ import type { User } from '@prisma/client'
 import type { CreateUserDTO } from '../interfaces/create-user-DTO'
 import type { UsersRepository } from '../users-repository'
 import { prisma } from '@/lib/prisma'
+import type { UpdateUserDTO } from '../interfaces/update-user-DTO'
 
 export class PrismaUsersRepository implements UsersRepository {
+
+
   async create(data: CreateUserDTO): Promise<User> {
     // criando o usuário no banco
     const user = await prisma.user.create({
@@ -42,8 +45,52 @@ export class PrismaUsersRepository implements UsersRepository {
       where: {
         id,
       },
+      include:{
+        branch: true,
+      }
     })
 
     return user
   }
+
+
+   async  update(id: string, data: UpdateUserDTO): Promise<User> {
+      const user = await prisma.user.update({
+        where:{
+          id
+        },
+        data
+      })
+
+
+      return user;
+  }
+
+
+    async fetchUsers(isTech?: string): Promise<User[] | null>{
+    const users = await prisma.user.findMany({
+      where:{
+        ...(isTech &&{
+          type_user: isTech
+        })
+      }, orderBy:{
+        updated_at: 'desc'
+      },
+      include:{
+        branch:{
+          select:{
+            id:true,
+            name: true,
+          }
+        }
+      }
+    })
+
+
+    return users
+  }
+
+
+
+ 
 }

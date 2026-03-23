@@ -27,7 +27,7 @@ export class CreateTicketUseCase {
     creator_id,
     branch_id,
   }: CreateTicketRequest): Promise<CreateTicketResponse> {
-    console.log(title)
+    
     const ticket = await this.ticketsRepository.create({
       title,
       description,
