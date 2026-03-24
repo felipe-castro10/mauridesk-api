@@ -24,10 +24,11 @@ model User {
   // Tickets que o técnico ATENDE
   ticketsAssigned Ticket[] @relation("TicketTechnician")
 
-  created_at DateTime  @default(now())
-  updated_at DateTime? @updatedAt
-  branch     Branch?   @relation(fields: [branch_id], references: [id])
-  branch_id  String?
+  created_at     DateTime        @default(now())
+  updated_at     DateTime?       @updatedAt
+  branch         Branch?         @relation(fields: [branch_id], references: [id])
+  branch_id      String?
+  ticketMessages TicketMessage[]
 
   @@map("users")
 }
@@ -59,8 +60,9 @@ model Ticket {
   resolved          Boolean   @default(false)
   closed_at         DateTime?
 
-  sla_due_at   DateTime // prazo máximo de resolução
-  sla_violated Boolean  @default(false)
+  sla_due_at     DateTime // prazo máximo de resolução
+  sla_violated   Boolean         @default(false)
+  ticketMessages TicketMessage[]
 
   @@map("tickets")
 }
@@ -75,4 +77,16 @@ model Branch {
   created_at DateTime @default(now())
 
   @@map("branchs")
+}
+
+model TicketMessage {
+  id         String   @id @default(uuid())
+  text       String
+  created_at DateTime @default(now())
+
+  ticket    Ticket @relation(fields: [ticket_id], references: [id])
+  ticket_id String
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
 }
