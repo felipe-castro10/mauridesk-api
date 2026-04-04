@@ -1,5 +1,5 @@
 import { UserNotExistsError } from "@/use-cases/errors/user-not-exists-error";
-import { MakeFetchUsersUseCase } from "@/use-cases/factories/make-fetch-users-use-case";
+import { MakeFetchUsersUseCase } from "@/use-cases/factories/users/make-fetch-users-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

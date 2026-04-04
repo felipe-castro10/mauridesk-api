@@ -1,5 +1,5 @@
 import { BranchAlreadyExistsError } from '@/use-cases/errors/branch-already-exists-error'
-import { makeCreateBranchUseCase } from '@/use-cases/factories/make-create-branch-use-case'
+import { makeCreateBranchUseCase } from '@/use-cases/factories/branchs/make-create-branch-use-case'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

@@ -1,4 +1,5 @@
-import { makeCreateTicketMessageUseCase } from "@/use-cases/factories/make-create-ticket-message-use-case";
+
+import { makeCreateTicketMessageUseCase } from "@/use-cases/factories/tickets/make-create-ticket-message-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

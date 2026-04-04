@@ -1,4 +1,4 @@
-import { makeFetchMetricsUseCase } from "@/use-cases/factories/make-fetch-metrics-use-case";
+import { makeFetchMetricsUseCase } from "@/use-cases/factories/tickets/make-fetch-metrics-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

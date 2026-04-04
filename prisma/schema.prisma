@@ -34,11 +34,11 @@ model User {
 }
 
 model Ticket {
-  id          String @id @default(uuid())
-  title       String
-  description String
-  category    String
-  department  String
+  id                String @id @default(uuid())
+  title             String
+  description       String
+  dynamic_responses Json?  @default("{}")
+  department        String
 
   status   String @default("OPEN")
   priority String @default("LOW")
@@ -52,6 +52,9 @@ model Ticket {
   branch    Branch? @relation(fields: [branch_id], references: [id])
   branch_id String?
 
+  category_id String
+  category    Category @relation(fields: [category_id], references: [id])
+
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -60,11 +63,22 @@ model Ticket {
   resolved          Boolean   @default(false)
   closed_at         DateTime?
 
-  sla_due_at     DateTime // prazo máximo de resolução
-  sla_violated   Boolean         @default(false)
+  sla_due_at   DateTime // prazo máximo de resolução
+  sla_violated Boolean  @default(false)
+
   ticketMessages TicketMessage[]
+  attachments    Attachment[]
 
   @@map("tickets")
+}
+
+model Attachment {
+  id         String   @id @default(uuid())
+  path       String
+  type       String
+  ticket_id  String
+  ticket     Ticket   @relation(fields: [ticket_id], references: [id])
+  created_at DateTime @default(now())
 }
 
 model Branch {
@@ -89,4 +103,13 @@ model TicketMessage {
 
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
+}
+
+model Category {
+  id            String   @id @default(uuid())
+  name          String
+  custom_fields Json     @default("[]")
+  tickets       Ticket[]
+
+  @@map("categories")
 }

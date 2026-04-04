@@ -18,12 +18,14 @@ export class PrismaTicketsRepository implements TicketsRepository {
       data: {
         title: data.title,
         description: data.description,
-        category: data.category,
+        category_id: data.category_id,
         department: data.department,
         priority: data.priority,
 
         creator_id: data.creator_id,
         branch_id: data.branch_id,
+
+        dynamic_responses: data.dynamic_responses ?? {},
 
         technician_id: null,
         sla_due_at,
@@ -101,6 +103,7 @@ export class PrismaTicketsRepository implements TicketsRepository {
        include:{
         branch: true,
         technician: true,
+        category: {select:{name: true}},
       }
     })
 

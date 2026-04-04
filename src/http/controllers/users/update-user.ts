@@ -6,7 +6,7 @@ import fs from "node:fs"
 import { pipeline } from "node:stream";
 import { promisify } from "node:util";
 import { z } from "zod";
-import { makeUpdateUserUseCase } from "@/use-cases/factories/make-update-user-use-case";
+import { makeUpdateUserUseCase } from "@/use-cases/factories/users/make-update-user-use-case";
 
 
 const pump = promisify(pipeline);

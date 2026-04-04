@@ -1,4 +1,4 @@
-import { makeListMessagesUseCase } from "@/use-cases/factories/make-list-messages-use-case";
+import { makeListMessagesUseCase } from "@/use-cases/factories/messages/make-list-messages-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

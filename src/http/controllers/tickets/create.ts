@@ -1,4 +1,4 @@
-import { makeCreateTicketUseCase } from '@/use-cases/factories/make-create-ticket-use-case'
+import { makeCreateTicketUseCase } from '@/use-cases/factories/tickets/make-create-ticket-use-case'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -9,26 +9,29 @@ export async function createTicket(
   const createTicketBodySchema = z.object({
     title: z.string(),
     description: z.string(),
-    category: z.string(),
+    category_id: z.string(),
     department: z.string(),
     priority: z.string(),
     branch_id: z.string(),
+    dynamic_responses: z.array(z.record(z.string(), z.any())).optional(),
   })
 
-  const { title, description, category, department, priority, branch_id } =
+  const { title, description, category_id, department, priority, branch_id, dynamic_responses } =
     createTicketBodySchema.parse(request.body)
 
+    console.log(title)
   const createTicketUseCase = makeCreateTicketUseCase()
 
-  await createTicketUseCase.execute({
+ const ticket =  await createTicketUseCase.execute({
     title,
     description,
-    category,
+    category_id,
     department,
     priority,
     creator_id: request.user.sub,
-    branch_id
+    branch_id,
+    dynamic_responses
   })
 
-  return reply.status(201).send({})
+  return ticket
 }

@@ -1,5 +1,5 @@
 import { BranchNotExistsError } from '@/use-cases/errors/branch-not-exists-error'
-import { makeFetchBranchsUseCase } from '@/use-cases/factories/make-fetch-branchs-use-case'
+import { makeFetchBranchsUseCase } from '@/use-cases/factories/branchs/make-fetch-branchs-use-case'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function fetchBranchs(

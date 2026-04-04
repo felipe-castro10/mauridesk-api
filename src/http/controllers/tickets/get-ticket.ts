@@ -1,4 +1,4 @@
-import { makeGetTicketUseCase } from '@/use-cases/factories/make-get-ticket-use-case'
+import { makeGetTicketUseCase } from '@/use-cases/factories/tickets/make-get-ticket-use-case'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

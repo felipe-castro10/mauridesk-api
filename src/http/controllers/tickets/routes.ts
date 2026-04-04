@@ -10,9 +10,10 @@ import { closeTicket } from './close-ticket'
 import { restartTicket } from './restart-ticket'
 
 export async function ticketsRoutes(app: FastifyInstance) {
-  app.addHook('onRequest', async (request, reply) => {
+   app.addHook('onRequest', async(request, reply) => {
     await verifyJWT(request, reply)
   })
+
 
   app.post('/tickets', createTicket)
   app.get('/tickets', fetchTickets)
@@ -21,10 +22,10 @@ export async function ticketsRoutes(app: FastifyInstance) {
 
   app.patch(
     '/ticket/start/:id',
-    { onRequest: [verifyJWT, verifyIsTech] },
+    { onRequest: [verifyIsTech] },
     startTicket,
   )
-  app.patch('/ticket/closed/:id/:resolved', {onRequest:[verifyJWT, verifyIsTech]}, closeTicket)
-  app.patch('/ticket/restart/:id', {onRequest:[verifyJWT,verifyIsTech]}, restartTicket)
+  app.patch('/ticket/closed/:id/:resolved', {onRequest:[verifyIsTech]}, closeTicket)
+  app.patch('/ticket/restart/:id', {onRequest:[verifyIsTech]}, restartTicket)
  
 }

@@ -1,5 +1,5 @@
-import { makeCloseTicketUseCase } from "@/use-cases/factories/make-closed-ticket-use-case";
-import { makeRestartTicketUseCase } from "@/use-cases/factories/make-restart-ticket-use-case";
+import { makeCloseTicketUseCase } from "@/use-cases/factories/tickets/make-closed-ticket-use-case";
+import { makeRestartTicketUseCase } from "@/use-cases/factories/tickets/make-restart-ticket-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

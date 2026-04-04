@@ -10,6 +10,8 @@ import fastifyMultipart from '@fastify/multipart'
 import fastifyStatic from '@fastify/static'
 import { uploadConfig } from './config/upload'
 import { messagesRoutes } from './http/controllers/Messages/routes'
+import { attachmentsRoutes } from './http/controllers/attachments/routes'
+import { categoriesRoutes } from './http/controllers/categories/routes'
 
 export const app =  fastify()
 
@@ -37,6 +39,8 @@ app.register(usersRoutes)
 app.register(ticketsRoutes)
 app.register(branchsRoutes)
 app.register(messagesRoutes)
+app.register(attachmentsRoutes)
+app.register(categoriesRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

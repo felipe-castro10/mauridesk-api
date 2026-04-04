@@ -1,4 +1,4 @@
-import { makeProfileUserUseCase } from '@/use-cases/factories/make-get-profile-user-use-case'
+import { makeProfileUserUseCase } from '@/use-cases/factories/users/make-get-profile-user-use-case'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
